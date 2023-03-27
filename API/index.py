@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from product import productStore
 import productgen
-import hashlib
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 appStore = productStore()
 
@@ -20,7 +22,7 @@ def healthCheck():
 @app.route('/api/product',methods=['POST'])
 def addNewProduct():
     raw = request.get_json()
-    if hashlib.sha1(raw['ProductName'].encode()).hexdigest() in appStore.store:
+    if appStore.checkName(raw['ProductName']):
         return "Error: This product name already exists, please use PUT with an ID if you want to edit", 400
     else:
         appStore.addProduct(raw["ProductName"],raw["ProductOwnerName"],raw["Developers"],
@@ -31,7 +33,7 @@ def addNewProduct():
 # Get a list of all products in the database
 @app.route("/api/product", methods=['GET'])
 def returnProdList():
-    json_list = jsonify(appStore.store)
+    json_list = jsonify({"products": appStore.list()})
     return json_list,200
 
 # Handle PUT without an ID [error]
@@ -55,7 +57,7 @@ def idPostError():
 # Get a single product by ID
 @app.route("/api/product/<string:prod_id>", methods=['GET'])
 def getbyID(prod_id):
-    if prod_id not in appStore.store:
+    if not appStore.checkID(prod_id):
         return "Error: could not find the requested ID", 400
     else:
         product = appStore.getByID(prod_id)
@@ -64,7 +66,7 @@ def getbyID(prod_id):
 # Given an ID, update a product in the store
 @app.route("/api/product/<string:prod_id>", methods=['PUT'])
 def editByID(prod_id):
-    if prod_id not in appStore.store:
+    if not appStore.checkID(prod_id):
         return "Error: could not find the requested ID", 400
     else:
         args = request.get_json()
@@ -74,7 +76,7 @@ def editByID(prod_id):
 # Given an ID, delete a product from the store
 @app.route("/api/product/<string:prod_id>", methods=['DELETE'])
 def deleteByID(prod_id):
-    if prod_id not in appStore.store:
+    if not appStore.checkID(prod_id):
         return "Error: could not find the requested ID", 400
     else:
         appStore.deleteByID
