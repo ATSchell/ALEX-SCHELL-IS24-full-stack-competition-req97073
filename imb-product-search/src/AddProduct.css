@@ -1,0 +1,23 @@
+input {
+    border: 1px #c0005c;
+    background-color: #221e35;
+    height: 30px;
+    text-align: center;
+    font-style: italic;
+}
+
+form {
+    width: 100%;
+    display: flex;
+}
+
+label {
+    height: 100%;
+    padding: 5px;
+}
+
+select {
+    background-color: #221e35;
+    text-align: center;
+    color:  #C4C4C4;
+}

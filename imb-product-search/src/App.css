@@ -2,26 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 .Table-Holder {
   width: 80%;
   margin-left: auto;
@@ -38,16 +18,30 @@
 .Refesh-button {
   height: 50%;
   top: 50%;
-  margin: 0px;
+  margin: 5px;
 }
 
 .Search-Bar {
-  padding-left: 10px;
-  height: 50%
+  margin: 5px;
+  height: 50%;
+  width: 50%;
 }
 
 .Search-Input {
   border: #c0005c;
   background-color: #221e35;
+  top: 50%;
   height: 100%;
+  width: 50%;
+}
+
+.Add-Holder {
+  margin-left: auto;
+  margin-right: auto;
+  height: 30%;
+  width: 80%;
+}
+
+input {
+  color: white;
 }
