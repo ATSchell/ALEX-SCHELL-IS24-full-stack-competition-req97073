@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import './App.css';
 import './DataTable'
+import HeaderBar from "./Header";
 import DataTable from "./DataTable";
 
 
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="App">
+      <HeaderBar />
       <div className="Table-Holder">
         <div className="Table-Operations">
           <button onClick={LoadTable} className="Refesh-button">Reload Data</button>
@@ -34,7 +36,6 @@ function App() {
           </div>
         </div>
         <DataTable tableData={tableData} />
-        
       </div>
     </div>
   );

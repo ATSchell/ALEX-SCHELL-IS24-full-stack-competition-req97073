@@ -31,3 +31,13 @@ button:hover {
 button:active {
   background-color: #8b0144;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #12101C;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #C4C4C4; 
+  border-radius: 10px;
+}

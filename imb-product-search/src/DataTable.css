@@ -1,22 +1,21 @@
 table {
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     padding: 20px;
     border-collapse:collapse;
-    box-shadow: 7px 5px 10px 4px #0a090f;
 }
 
 td, th {
     border: none;
     padding: 8px;
 }
+
 th {
     padding-top: 12px;
     padding-bottom: 12px;
     background-color: #c0005c;
     color: white;
-    font-size: 15px;
 }
+
 img {
     max-width: 20px;
 }
@@ -24,9 +23,30 @@ img {
 tr:nth-child(even) {
     background-color: #221e35;
 }
+
 .buttonElement {
     margin: 0%;
     width: 30px;
     padding:0%;
     border: none;
 }
+
+.Scrollable-Table {
+    overflow: auto;
+    height: 700px;
+}
+
+.Scrollable-Table thead {
+    position: sticky;
+    top: 0;
+}
+
+.Scrollable-Table tfoot {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    font-style: italic;
+    text-align: left;
+    background-color: #12101C;
+}
+

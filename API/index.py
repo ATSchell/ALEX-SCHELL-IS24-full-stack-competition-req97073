@@ -79,12 +79,12 @@ def deleteByID(prod_id):
     if not appStore.checkID(prod_id):
         return "Error: could not find the requested ID", 400
     else:
-        appStore.deleteByID
+        appStore.deleteByID(prod_id)
         return 'deleted', 200
 
 # --- api/product/users
 # TODO: Add in api endpoints for users
 
 if __name__ == '__main__':
-    productgen.generateProducts(5,appStore)
+    productgen.generateProducts(40,appStore)
     app.run(host="localhost", port=3000)

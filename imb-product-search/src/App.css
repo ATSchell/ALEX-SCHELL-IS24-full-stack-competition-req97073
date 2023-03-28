@@ -24,7 +24,8 @@
 
 .Table-Holder {
   width: 80%;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Table-Operations {
@@ -37,12 +38,12 @@
 .Refesh-button {
   height: 50%;
   top: 50%;
+  margin: 0px;
 }
 
 .Search-Bar {
   padding-left: 10px;
-  height: 50%;
-  
+  height: 50%
 }
 
 .Search-Input {

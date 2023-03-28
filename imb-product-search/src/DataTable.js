@@ -15,17 +15,21 @@ function EditItem({product}) {
 
 function DataTable({tableData}) {
     return (
+    <div className="Scrollable-Table">
       <table>
-        <tbody>
+        <thead>
             <tr>
-            <th>Product ID </th>
-            <th>Name </th>
-            <th>Owner </th>
-            <th>Developers </th>
-            <th>Scrum Master </th>
-            <th>Start Date </th>
-            <th>Methodology </th>
+                <th>Product ID </th>
+                <th>Name </th>
+                <th>Owner </th>
+                <th>Developers </th>
+                <th>Scrum Master </th>
+                <th>Start Date </th>
+                <th>Methodology </th>
+                <th colSpan="2"></th>
             </tr>
+        </thead>
+        <tbody>
             {tableData.map((product, id) => (
             <tr key= {id}>
                 <td>{product.ProductID}</td>
@@ -44,7 +48,9 @@ function DataTable({tableData}) {
             </tr> 
             ))}
         </tbody>
-      </table>
+        <tfoot><tr><td colSpan="9">Total products retrived: {tableData.length}</td></tr></tfoot>
+        </table>
+      </div>
     );
   };
 

@@ -1,0 +1,22 @@
+.Header-Bar {
+    height: 30%;
+    display: grid;
+    display:flex;
+    align-items: center;
+    background-color: #221e35;
+}
+
+.Header-Contents {
+    margin: auto;
+    padding: 10px;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.logo {
+    height: 100%;
+    padding: 10px;
+    position: relative;
+    left: 0;
+    max-width: 100px;
+}
