@@ -48,7 +48,7 @@ function DataTable({tableData}) {
             </tr> 
             ))}
         </tbody>
-        <tfoot><tr><td colSpan="9">Total products retrived: {tableData.length}</td></tr></tfoot>
+        <tfoot><tr><td colSpan="9">Total products retrieved: {tableData.length}</td></tr></tfoot>
         </table>
       </div>
     );
