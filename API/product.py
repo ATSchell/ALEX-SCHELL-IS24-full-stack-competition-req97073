@@ -8,7 +8,8 @@ class productStore:
     # Add a new product to the dict using the productID
     def addProduct(self, Name:str, Owner:str, Devs:list[str], ScrumMaster:str, StartDate:str, Methodology:str):
         product = {}
-        product["ProductID"] = hashlib.sha1(Name.encode()).hexdigest()
+        ID = hashlib.sha1(Name.encode()).hexdigest()
+        product["ProductID"] = ID
         product["ProductName"] = Name
         product["ProductOwnerName"] = Owner
         product["Developers"] = Devs
@@ -17,12 +18,12 @@ class productStore:
         product["Methodology"] = Methodology
 
         self.store[product["ProductID"]] = product
+        return ID
 
     # Return all items in the dictionary
     def list(self):
         # return array of product details + count
         formatted = []
-        itemCount = len(self.store)
         for p in self.store.values():
             formatted.append(p)
         return formatted

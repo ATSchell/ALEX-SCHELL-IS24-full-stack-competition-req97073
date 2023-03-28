@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 from product import productStore
+from personStore import personStore
 import productgen
 
 app = Flask(__name__)
@@ -8,6 +9,7 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 appStore = productStore()
+employeeStore = personStore()
 
 # --- api/health ---
 
@@ -25,9 +27,12 @@ def addNewProduct():
     if appStore.checkName(raw['ProductName']):
         return "Error: This product name already exists, please use PUT with an ID if you want to edit", 400
     else:
-        appStore.addProduct(raw["ProductName"],raw["ProductOwnerName"],raw["Developers"],
+        ID = appStore.addProduct(raw["ProductName"],raw["ProductOwnerName"],raw["Developers"],
                             raw["ScrumMasterName"],raw["StartDate"],raw["Methodology"]
                             )
+        print("got ID"+ID)
+        employeeStore.addDev(raw["Developers"], ID)
+        employeeStore.addScrum(raw["ScrumMasterName"], ID)
         return 'Product added', 200
 
 # Get a list of all products in the database
@@ -82,9 +87,28 @@ def deleteByID(prod_id):
         appStore.deleteByID(prod_id)
         return 'deleted', 200
 
-# --- api/product/users
-# TODO: Add in api endpoints for users
+# --- api/employee
+
+# get list of employees
+@app.route("/api/employee", methods=['GET'])
+def listEmployees():
+    employees = jsonify({"employees":employeeStore.list()})
+    return employees, 200
+
+# get list of products an employee was dev on
+@app.route("/api/employee/<string:name>/developed", methods=['GET'])
+def getDevelopedByName(name):
+    name = name.replace("_", " ")
+    products = jsonify({"products":employeeStore.getDevProducts(name)})
+    return products, 200
+
+# get list of products an employee was scrum master on
+@app.route("/api/employee/<string:name>/scrummed", methods=['GET'])
+def getScrummedByName(name):
+    name = name.replace("_", " ")
+    products = jsonify({"products":employeeStore.getScrumProducts(name)})
+    return products, 200
 
 if __name__ == '__main__':
-    productgen.generateProducts(40,appStore)
+    productgen.generateProducts(40,appStore, employeeStore)
     app.run(host="localhost", port=3000)
