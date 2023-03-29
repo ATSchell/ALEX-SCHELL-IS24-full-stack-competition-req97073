@@ -1,5 +1,5 @@
 import './DataTable.css';
-import React, { useEffect } from "react";
+import React from "react";
 
 import TableElement from './TableElement';
 
@@ -14,12 +14,8 @@ export const LoadTable = async(setTable) => {
 }// LoadTable 
 
 //main display of table
-function DataTable({tableData, tableUpdater, editUpdater}) {
+function DataTable({tableData, tableUpdater}) {
     
-    useEffect(() => {
-        console.log("table funct called ");
-      });
-
     return (
     <div className="Scrollable-Table">
       <table>
@@ -36,7 +32,7 @@ function DataTable({tableData, tableUpdater, editUpdater}) {
             </tr>
         </thead>
         <tbody>
-            {tableData.map((product, id) => ( <TableElement product={product} id={id}/>))}
+            {tableData.map((product, id) => ( <TableElement product={product} tableRefresh={tableUpdater} />))}
         </tbody>
         <tfoot><tr><td colSpan="9">Total products retrieved: {tableData.length}</td></tr></tfoot>
         </table>

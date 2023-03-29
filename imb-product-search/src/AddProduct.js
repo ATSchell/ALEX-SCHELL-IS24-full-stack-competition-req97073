@@ -2,7 +2,8 @@ import './AddProduct.css';
 import React from "react";
 import { LoadTable } from "./DataTable";
 
-function AddProduct({tableLoader}) {
+// Form and logic for adding a product to the database via API request
+function AddProduct({tableLoader, setVisablity}) {
     const [product, setProduct] = React.useState({
         ProductName: "",
         ScrumMasterName: "",
@@ -32,7 +33,9 @@ function AddProduct({tableLoader}) {
                                 Developers: product.Developers, StartDate: product.StartDate, Methodology: product.Methodology})
         };
         // send the POST Request
-        fetch("http://localhost:3000/api/product",postOptions).then(LoadTable(tableLoader)).then(response => console.log(response));
+        await fetch("http://localhost:3000/api/product",postOptions).then(response => console.log(response));
+        LoadTable(tableLoader);
+        setVisablity(false);
         console.log("POST Done");
     };//handleAddProduct
 

@@ -42,11 +42,11 @@ function App() {
             <button>Search</button>
           </div>
         </div>
-        <DataTable tableData={tableData} tableUpdater={setTable} editUpdater={setEditVis}/>
+        <DataTable tableData={tableData} tableUpdater={setTable}/>
       </div>
       {addVis && (
         <div className="Add-Holder">
-          <AddProduct tableLoader={setTable}/>
+          <AddProduct tableLoader={setTable} setVisablity={setAddVis}/>
         </div>
       )}
     </div>

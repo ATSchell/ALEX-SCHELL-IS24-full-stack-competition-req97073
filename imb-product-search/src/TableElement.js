@@ -3,8 +3,10 @@ import editIcon from './edit_icon.png';
 import deleteIcon from './delete_icon.png';
 import confirmIcon from './check_icon.png';
 import exitIcon from './exit_icon.png';
+import { LoadTable } from "./DataTable";
 
-function TableElement({product, id}) {
+// Displays a row element in a table for each product, and gives the relveant buttons to edit and delete that product
+function TableElement({product, tableRefresh}) {
     const [editVis, setEditVis] = useState(false);
     const [editProduct, setEditProduct] = React.useState({
         ProductID: product.ProductID,
@@ -23,15 +25,15 @@ function TableElement({product, id}) {
         });
     }
 
-
     //Function for deleting on click on relevant button 
-    function DeleteItem({product}) {
+    async function DeleteItem({product}) {
         console.log("Deleting ID:"+product.ProductID);
         const deleteOptions = {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         };
-        fetch('http://127.0.0.1:3000/api/product/'+product.ProductID,deleteOptions);
+        await fetch('http://127.0.0.1:3000/api/product/'+product.ProductID,deleteOptions);
+        LoadTable(tableRefresh);
     };// DeleteItem
 
     //Function for editing on click on relevant button 
@@ -39,7 +41,8 @@ function TableElement({product, id}) {
         setEditVis(!editVis);
     };// EditItem
 
-    function SubmitEdit({product}) {
+    //Sends PUT request to API with edited data
+    async function SubmitEdit({product}) {
         console.log("send to PUT command");
         console.log(editProduct.ProductName)
         const putOptions = {
@@ -48,7 +51,8 @@ function TableElement({product, id}) {
             body: JSON.stringify({ProductName: editProduct.ProductName, ScrumMasterName: editProduct.ScrumMasterName, ProductOwnerName: editProduct.ProductOwnerName,
                                 Developers: editProduct.Developers, StartDate: editProduct.StartDate, Methodology: editProduct.Methodology})
         };
-        fetch('http://127.0.0.1:3000/api/product/'+product.ProductID,putOptions);
+        await fetch('http://127.0.0.1:3000/api/product/'+product.ProductID,putOptions);
+        LoadTable(tableRefresh);
         setEditVis(!editVis);
     };
 
