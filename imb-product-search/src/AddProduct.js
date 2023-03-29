@@ -68,7 +68,7 @@ function AddProduct({tableLoader}) {
                 <select value={product.Methodology} onChange={handleChange} id="Methodology">
                     <option value="Agile">Agile</option>
                     <option value="Waterfall">Waterfall</option>
-          </select>
+                </select>
             </label>
             <button type="submit">Submit</button>
         </form>
