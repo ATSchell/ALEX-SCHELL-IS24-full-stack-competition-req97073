@@ -1,0 +1,7 @@
+Deletes the product database
+Clears out the product database, leaving nothing behind. Use with caution!
+---
+
+responses:
+    '200':
+      description: The database was deleted.

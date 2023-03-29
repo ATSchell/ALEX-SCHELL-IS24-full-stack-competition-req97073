@@ -1,0 +1,17 @@
+Delete a given product
+Given the ID of a product, removes it from the database.
+---
+consumes:
+  - application/json
+parameters:
+  - name: ProductID
+    in: path
+    required: True
+    description: The hexadecimal Product ID of the product to remove.
+    schema:
+      type: string
+      format: hex
+
+responses:
+    '200':
+      description: The product in the database was deleted sucessfully.

@@ -1,0 +1,56 @@
+Modify product details 
+Given an ID, uses the body data to modify the data for that product, as of 1.0 requires all data to be passed to work.
+---
+consumes:
+  - application/json
+parameters:
+  - name: ProductID
+    in: path
+    required: True
+    description: The hexadecimal Product ID of the product to edit.
+    schema:
+      type: string
+      format: hex
+
+requestBody:
+    description: The data to modify the given product with
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - ProductName
+            - ProductOwnerName
+            - Developers
+            - ScrumMasterName
+            - StartDate
+            - Methodology
+          properties:
+            ProductName:
+              type: string
+              description: The name for the product.
+              example: "Firstname McLastname"
+            ProductOwnerName:
+              type: string
+              description: The name of the owner of the product.
+              example: "Product Owner"
+            Developers:
+              type: array
+              items:
+                  type: string
+              description: The list of devs working on the product
+              example: ["dev a", "dev b", "dev c"]
+            ScrumMasterName:
+              type: string
+              description: The name of scrum master for the product
+              example: "Scrumbo Master of Scrums"
+            StartDate:
+              type: string
+              description: The date work started on the product
+              format: datetime
+              example: "2023-03-31"
+            Methodology:
+              type: string
+              description: Either Agile or Waterfall
+              example: "Agile"

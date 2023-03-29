@@ -1,0 +1,16 @@
+Get list of employees
+Get a list of all employees that have been assigned as scrum master or developer on a product.
+---
+responses:
+  '200':
+    description: OK
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            employees: 
+              type: array
+              items: 
+                type: string
+                example: Dev a

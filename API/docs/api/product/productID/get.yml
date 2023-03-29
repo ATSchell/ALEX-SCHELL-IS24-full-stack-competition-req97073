@@ -1,0 +1,53 @@
+Get the details for a product
+For a single product, get all the data stored in it using the product ID provided.
+---
+consumes:
+  - application/json
+parameters:
+  - name: ProductID
+    in: path
+    required: true
+    description: The hexadecimal Product ID of the product to retrive.
+    schema:
+      type: string
+      format: hex
+
+responses:
+  '200':
+    description: OK
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            ProductID:
+              type: string
+              description: The hex value of the ID assigned to the product
+              example: "5593349f2384b58d1e3ab03b8e4ecf68fa4746ac"
+            ProductName:
+              type: string
+              description: The name for the product.
+              example: "Firstname McLastname"
+            ProductOwnerName:
+              type: string
+              description: The name of the owner of the product.
+              example: "Product Owner"
+            Developers:
+              type: array
+              items:
+                type: string
+              description: The list of devs working on the product
+              example: ["dev a", "dev b", "dev c"]
+            ScrumMasterName:
+              type: string
+              description: The name of scrum master for the product
+              example: "Scrumbo Master of Scrums"
+            StartDate:
+              type: string
+              description: The date work started on the product
+              format: datetime
+              example: "2023-03-31"
+            Methodology:
+              type: string
+              description: Either Agile or Waterfall
+              example: "Agile"

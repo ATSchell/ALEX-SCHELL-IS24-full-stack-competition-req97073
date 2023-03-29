@@ -1,0 +1,48 @@
+Creates a new Product object and stores it in the mock database using generated ID. 
+Any developers or scrum masters will also be created in the relavant database and have this product stored with them.
+---
+requestBody:
+  description: The details of the product to add with a maximum number of 5 devs.
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - ProductName
+          - ProductOwnerName
+          - Developers
+          - ScrumMasterName
+          - StartDate
+          - Methodology
+        properties:
+          ProductName:
+            type: string
+            description: The name for the product.
+            example: "Firstname McLastname"
+          ProductOwnerName:
+            type: string
+            description: The name of the owner of the product.
+            example: "Product Owner"
+          Developers:
+            type: array
+            items:
+                type: string
+            description: The list of devs working on the product
+            example: ["dev a", "dev b", "dev c"]
+          ScrumMasterName:
+            type: string
+            description: The name of scrum master for the product
+            example: "Scrumbo Master of Scrums"
+          StartDate:
+            type: string
+            description: The date work started on the product
+            format: datetime
+            example: "2023-03-31"
+          Methodology:
+            type: string
+            description: Either Agile or Waterfall
+            example: "Agile"
+responses:
+  '200':
+    description: The product and related developers have been added to their revlant mock databases.
