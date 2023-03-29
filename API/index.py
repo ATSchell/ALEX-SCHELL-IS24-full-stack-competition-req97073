@@ -25,7 +25,7 @@ def healthCheck():
 def addNewProduct():
     raw = request.get_json()
     if appStore.checkName(raw['ProductName']):
-        return "Error: This product name already exists, please use PUT with an ID if you want to edit", 400
+        return "Error: This product name already exists, please use PUT with an ID if you want to edit", 409
     else:
         ID = appStore.addProduct(raw["ProductName"],raw["ProductOwnerName"],raw["Developers"],
                             raw["ScrumMasterName"],raw["StartDate"],raw["Methodology"]
@@ -63,7 +63,7 @@ def idPostError():
 @app.route("/api/product/<string:prod_id>", methods=['GET'])
 def getbyID(prod_id):
     if not appStore.checkID(prod_id):
-        return "Error: could not find the requested ID", 400
+        return "Error: could not find the requested ID", 404
     else:
         product = appStore.getByID(prod_id)
         return jsonify(product), 200
@@ -72,7 +72,7 @@ def getbyID(prod_id):
 @app.route("/api/product/<string:prod_id>", methods=['PUT'])
 def editByID(prod_id):
     if not appStore.checkID(prod_id):
-        return "Error: could not find the requested ID", 400
+        return "Error: could not find the requested ID", 404
     else:
         args = request.get_json()
         appStore.editByID(prod_id,args)
@@ -82,7 +82,7 @@ def editByID(prod_id):
 @app.route("/api/product/<string:prod_id>", methods=['DELETE'])
 def deleteByID(prod_id):
     if not appStore.checkID(prod_id):
-        return "Error: could not find the requested ID", 400
+        return "Error: could not find the requested ID", 404
     else:
         appStore.deleteByID(prod_id)
         return 'deleted', 200
@@ -95,6 +95,12 @@ def listEmployees():
     employees = jsonify({"employees":employeeStore.list()})
     return employees, 200
 
+@app.route("/api/employee", methods=['POST'])
+def addEmployeeError():
+    return 'Not yet implmented', 501
+
+# --- api/employee/userID/developed
+
 # get list of products an employee was dev on
 @app.route("/api/employee/<string:name>/developed", methods=['GET'])
 def getDevelopedByName(name):
@@ -102,12 +108,39 @@ def getDevelopedByName(name):
     products = jsonify({"products":employeeStore.getDevProducts(name)})
     return products, 200
 
+# These are not implmented as outside scope of extra points
+@app.route("/api/employee/<string:name>/developed", methods=['DELETE'])
+def deleteEmployeeDev(name):
+    return 'Not yet implmented', 501
+
+@app.route("/api/employee/<string:name>/developed", methods=['PUT'])
+def editEmployeeDev(name):
+    return 'Not yet implmented', 501
+
+@app.route("/api/employee/<string:name>/developed", methods=['POST'])
+def postEmployeeDev(name):
+    return 'Not yet implmented', 501
+# --- api/employee/userID/scrummed
+
 # get list of products an employee was scrum master on
 @app.route("/api/employee/<string:name>/scrummed", methods=['GET'])
 def getScrummedByName(name):
     name = name.replace("_", " ")
     products = jsonify({"products":employeeStore.getScrumProducts(name)})
     return products, 200
+
+# These are not implmented as outside scope of extra points
+@app.route("/api/employee/<string:name>/scrummed", methods=['DELETE'])
+def deleteEmployeeScrum(name):
+    return 'Not yet implmented', 501
+
+@app.route("/api/employee/<string:name>/scrummed", methods=['PUT'])
+def editEmployeeScrum(name):
+    return 'Not yet implmented', 501
+
+@app.route("/api/employee/<string:name>/scrummed", methods=['POST'])
+def postEmployeeScrum(name):
+    return 'Not yet implmented', 501
 
 if __name__ == '__main__':
     productgen.generateProducts(40,appStore, employeeStore)
