@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import './App.css';
-import './DataTable'
-import HeaderBar from "./Header";
-import DataTable from "./DataTable";
-import AddProduct from "./AddProduct";
-import { LoadTable } from "./DataTable";
+import './components/DataTable'
+import HeaderBar from "./components/Header";
+import DataTable from "./components/DataTable";
+import AddProduct from "./components/AddProduct";
+import { LoadTable } from "./components/DataTable";
 
 function App() {
   // use a state hook to update the table data when needed.

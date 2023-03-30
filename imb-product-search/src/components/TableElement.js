@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import editIcon from './edit_icon.png';
-import deleteIcon from './delete_icon.png';
-import confirmIcon from './check_icon.png';
-import exitIcon from './exit_icon.png';
+import editIcon from '../img/edit_icon.png';
+import deleteIcon from '../img/delete_icon.png';
+import confirmIcon from '../img/check_icon.png';
+import exitIcon from '../img/exit_icon.png';
 import { LoadTable } from "./DataTable";
 
 // Displays a row element in a table for each product, and gives the relveant buttons to edit and delete that product
