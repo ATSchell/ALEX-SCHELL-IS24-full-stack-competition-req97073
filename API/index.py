@@ -95,7 +95,15 @@ def editByID(prod_id):
         return "Error: could not find the requested ID", 404
     else:
         args = request.get_json()
+        # get old and new devs to compare 
+        oldDevs = appStore.getDevs(prod_id)
+        oldScrum = appStore.getScrum(prod_id)
+        # do the edit itself to the product in storage
         appStore.editByID(prod_id,args)
+        newDevs = appStore.getDevs(prod_id)
+        newScrum = appStore.getScrum(prod_id)
+        employeeStore.editDev(oldDevs, newDevs, prod_id)
+        employeeStore.editScrum(oldScrum,newScrum,prod_id)
         return 'Updated', 200
 
 # Given an ID, delete a product from the store
@@ -105,7 +113,15 @@ def deleteByID(prod_id):
     if not appStore.checkID(prod_id):
         return "Error: could not find the requested ID", 404
     else:
+        # get the list of devs and the srum master to remove this product from
+        developers = appStore.getDevs(prod_id)
+        scrumMaster = appStore.getScrum(prod_id)
+        # delete the product
         appStore.deleteByID(prod_id)
+        # remove product from all devs that worked on it
+        for dev in developers:
+            employeeStore.removeDev(dev,prod_id)
+        employeeStore.removeScrum(scrumMaster, prod_id)
         return 'deleted', 200
 
 # --- api/employee

@@ -52,3 +52,9 @@ class productStore:
     def checkID(self, ID:hex):
         if ID in self.store: return True
         else: return False
+
+    def getDevs(self, ID):
+        return self.store[ID]["Developers"]
+
+    def getScrum(self, ID):
+        return self.store[ID]["ScrumMasterName"]

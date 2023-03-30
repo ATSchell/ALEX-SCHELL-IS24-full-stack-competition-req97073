@@ -32,6 +32,33 @@ class personStore:
             newDev.scrummed.append(product)
             self.store[name] = newDev
 
+    # remove a product from a developer
+    def removeDev(self, name, product):
+        if name not in self.store:
+            pass
+        else:
+            self.store[name].developed.remove(product)
+
+    def removeScrum(self, name:str, product):
+        if name not in self.store:
+            pass
+        else:
+            self.store[name].scrummed.remove(product)
+
+    # For use when modifying devs on a product, removes and add product to dev's lists as needed
+    def editDev(self, oldDevs, newDevs, product):
+        added = list(set(newDevs)-set(oldDevs))
+        removed = list(set(oldDevs)-set(newDevs))
+        self.addDev(added, product)
+        for dev in removed:
+            self.removeDev(dev,product)
+
+    # Change list of scrummed products for handoff between two SMs
+    def editScrum(self, oldScrum, newScrum, product):
+        if oldScrum != newScrum:
+            self.removeScrum(oldScrum, product)
+            self.addScrum(newScrum,product)
+        
     #TODO: Make this a proper return of products deved and SM'ed by each employee
     def list(self):
         return list(self.store.keys())
