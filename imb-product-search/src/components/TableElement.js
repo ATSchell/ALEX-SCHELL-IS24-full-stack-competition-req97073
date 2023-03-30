@@ -61,11 +61,11 @@ function TableElement({product, tableRefresh}) {
                 {editVis ? (
                     <>
                     <td>{product.ProductID}</td>
-                    <td><input defaultvalue={editProduct.ProductName} id="ProductName" onChange={handleChange} required/></td>
-                    <td><input defaultvalue={product.ProductOwnerName} id="ScrumMasterName" onChange={handleChange} required/></td>
-                    <td><input defaultvalue={product.Developers} id="ProductOwnerName" onChange={handleChange} required/></td>
-                    <td><input defaultvalue={product.ScrumMasterName} id="Developers" onChange={handleChange} required/></td>
-                    <td><input defaultvalue={product.StartDate} id="StartDate" onChange={handleChange} required/></td>
+                    <td><input defaultValue={editProduct.ProductName} id="ProductName" onChange={handleChange} required/></td>
+                    <td><input defaultValue={product.ProductOwnerName} id="ProductOwnerName" onChange={handleChange} required/></td>
+                    <td><input defaultValue={product.Developers} id="Developers" onChange={handleChange} required/></td>
+                    <td><input defaultValue={product.ScrumMasterName} id="ScrumMasterName" onChange={handleChange} required/></td>
+                    <td><input defaultValue={product.StartDate} id="StartDate" onChange={handleChange} required/></td>
                     <td>                
                         <select defaultvalue={product.Methodology} id="Methodology" onChange={handleChange}>
                             <option value="Agile">Agile</option>
