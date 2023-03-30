@@ -1,0 +1,19 @@
+.Search-Bar {
+    margin: 5px;
+    height: 50%;
+    width: 80%;
+}
+
+.Search-Input {
+    background-color: #221e35;
+    top: 50%;
+    height: 100%;
+    width: 50%;
+}
+
+select {
+    height: 100%;
+    top: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+}

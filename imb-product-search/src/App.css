@@ -21,19 +21,6 @@
   margin: 5px;
 }
 
-.Search-Bar {
-  margin: 5px;
-  height: 50%;
-  width: 50%;
-}
-
-.Search-Input {
-  border: #c0005c;
-  background-color: #221e35;
-  top: 50%;
-  height: 100%;
-  width: 50%;
-}
 
 .Add-Holder {
   margin-left: auto;
@@ -44,4 +31,8 @@
 
 input {
   color: white;
+}
+
+button {
+  font-size: 0.9vw;
 }

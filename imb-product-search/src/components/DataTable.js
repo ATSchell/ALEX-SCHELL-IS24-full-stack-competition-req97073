@@ -13,6 +13,17 @@ export const LoadTable = async(setTable) => {
     }).then(console.log("ran GET request"));
 }// LoadTable 
 
+//Get products developed by a person given a name
+export const LoadTableForDev = async(setTable, name, type) => {
+  console.log("send POST request for "+name)
+  const resp = await fetch('http://localhost:3000/api/employee/'+name+'/'+type);
+  // extract json from response and write to table data var
+  console.log(resp);
+  resp.json().then((repJSON) => {
+    setTable(repJSON.products);
+  }).then(console.log("ran GET request"));
+}//LoadTableForDev 
+
 //main display of table
 function DataTable({tableData, tableUpdater}) {
     

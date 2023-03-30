@@ -144,8 +144,11 @@ def addEmployeeError():
 @swag_from("./docs/api/employee/name/developed/get.yml")
 def getDevelopedByName(name):
     name = name.replace("_", " ")
-    products = jsonify({"products":employeeStore.getDevProducts(name)})
-    return products, 200
+    productIDs = employeeStore.getDevProducts(name)
+    developedProducts = []
+    for ID in productIDs :
+        developedProducts.append(appStore.getByID(ID))
+    return jsonify({"products":developedProducts}), 200
 
 # These are not implmented as outside scope of extra points
 @app.route("/api/employee/<string:name>/developed", methods=['DELETE'])
@@ -167,8 +170,11 @@ def postEmployeeDev(name):
 @swag_from("./docs/api/employee/name/scrummed/get.yml")
 def getScrummedByName(name):
     name = name.replace("_", " ")
-    products = jsonify({"products":employeeStore.getScrumProducts(name)})
-    return products, 200
+    productIDs = employeeStore.getScrumProducts(name)
+    scrummedProducts = []
+    for ID in productIDs:
+        scrummedProducts.append(appStore.getByID(ID))
+    return jsonify({"products":scrummedProducts}), 200
 
 # These are not implmented as outside scope of extra points
 @app.route("/api/employee/<string:name>/scrummed", methods=['DELETE'])

@@ -4,6 +4,7 @@ import './components/DataTable'
 import HeaderBar from "./components/Header";
 import DataTable from "./components/DataTable";
 import AddProduct from "./components/AddProduct";
+import SearchBar from "./components/SearchBar";
 import { LoadTable } from "./components/DataTable";
 
 function App() {
@@ -16,8 +17,6 @@ function App() {
 
   // state hook for updating visablity of add component
   const [addVis, setAddVis] = useState(false);
-
-  const [editVis, setEditVis] = useState(false);
 
   // toggle the add item form by button
   const ToggleAddDiv = () => {
@@ -37,10 +36,7 @@ function App() {
         <div className="Table-Operations">
           <button onClick={()=>ToggleAddDiv()} className="Refesh-button">Add Item</button>
           <button onClick={()=>LoadTable(setTable)} className="Refesh-button">Reload Data</button>
-          <div className="Search-Bar">
-            <input type="text" placeholder="Search for items" className="Search-Input" />
-            <button>Search</button>
-          </div>
+          <SearchBar tableRefresh={setTable}/>
         </div>
         <DataTable tableData={tableData} tableUpdater={setTable}/>
       </div>
