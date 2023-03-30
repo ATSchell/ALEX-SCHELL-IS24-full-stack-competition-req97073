@@ -24,6 +24,10 @@ tr:nth-child(even) {
     background-color: #221e35;
 }
 
+tr:nth-child(even) input {
+    background-color: #12101C;
+}
+
 .buttonElement {
     margin: 0%;
     width: 30px;

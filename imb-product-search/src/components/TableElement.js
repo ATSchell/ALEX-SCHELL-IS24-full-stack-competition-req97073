@@ -61,13 +61,13 @@ function TableElement({product, tableRefresh}) {
                 {editVis ? (
                     <>
                     <td>{product.ProductID}</td>
-                    <td><input value={editProduct.ProductName} id="ProductName" onChange={handleChange} required/></td>
-                    <td><input value={product.ProductOwnerName} id="ScrumMasterName" onChange={handleChange} required/></td>
-                    <td><input value={product.Developers} id="ProductOwnerName" onChange={handleChange} required/></td>
-                    <td><input value={product.ScrumMasterName} id="Developers" onChange={handleChange} required/></td>
-                    <td><input value={product.StartDate} id="StartDate" onChange={handleChange} required/></td>
+                    <td><input defaultvalue={editProduct.ProductName} id="ProductName" onChange={handleChange} required/></td>
+                    <td><input defaultvalue={product.ProductOwnerName} id="ScrumMasterName" onChange={handleChange} required/></td>
+                    <td><input defaultvalue={product.Developers} id="ProductOwnerName" onChange={handleChange} required/></td>
+                    <td><input defaultvalue={product.ScrumMasterName} id="Developers" onChange={handleChange} required/></td>
+                    <td><input defaultvalue={product.StartDate} id="StartDate" onChange={handleChange} required/></td>
                     <td>                
-                        <select value={product.Methodology} id="Methodology" onChange={handleChange}>
+                        <select defaultvalue={product.Methodology} id="Methodology" onChange={handleChange}>
                             <option value="Agile">Agile</option>
                             <option value="Waterfall">Waterfall</option>
                         </select>
@@ -84,7 +84,7 @@ function TableElement({product, tableRefresh}) {
                     <td>{product.ProductID}</td>
                     <td>{product.ProductName}</td>
                     <td>{product.ProductOwnerName}</td>
-                    <td>{product.Developers}</td>
+                    <td>{product.Developers.toString()}</td>
                     <td>{product.ScrumMasterName}</td>
                     <td>{product.StartDate}</td>
                     <td>{product.Methodology}</td>
