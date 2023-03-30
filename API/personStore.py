@@ -59,13 +59,19 @@ class personStore:
             self.removeScrum(oldScrum, product)
             self.addScrum(newScrum,product)
         
-    #TODO: Make this a proper return of products deved and SM'ed by each employee
+    # Return list of users
     def list(self):
         return list(self.store.keys())
         
+    # Return a list of productIDs developed by the user
     def getDevProducts(self, name:str):
         return self.store[name].developed
-
+    
+    # Return a list of productIDs scrummed by the user
     def getScrumProducts(self, name:str):
         return self.store[name].scrummed
+    
+    # check if a user is in the database
+    def checkUser(self, name:str):
+        return (name in self.store)
               

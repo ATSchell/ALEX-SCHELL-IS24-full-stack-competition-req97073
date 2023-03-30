@@ -7,7 +7,7 @@ import datetime
 def generateProducts(runs:int, store:productStore, people:personStore):
     for i in range(runs):
         Name = "testProd "+str(i)
-        ID = store.addProduct(Name, "First Last",["test", "name", "x"],"Test Name","2023-03-31" ,"Agile")
+        ID = store.addProduct(Name, "First Last",["test", "name", "x"],"Test Name","2023/03/31" ,"Agile")
         people.addDev(["test", "name", "x"], ID)
         people.addScrum("Test Name", ID)
     

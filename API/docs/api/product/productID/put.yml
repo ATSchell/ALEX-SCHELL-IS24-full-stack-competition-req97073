@@ -54,3 +54,11 @@ requestBody:
               type: string
               description: Either Agile or Waterfall
               example: "Agile"
+
+responses:
+  '200':
+    description: The product has been successfully updated
+  '400':
+    description: The data for the product was malformed, check the Methodology or date.
+  '409':
+    description: A product with the editied name is already in the database.

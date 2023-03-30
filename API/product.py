@@ -58,3 +58,7 @@ class productStore:
 
     def getScrum(self, ID):
         return self.store[ID]["ScrumMasterName"]
+    
+
+    def getName(self, ID):
+        return self.store[ID]["ProductName"]

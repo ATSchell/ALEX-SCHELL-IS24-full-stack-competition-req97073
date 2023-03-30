@@ -46,3 +46,17 @@ requestBody:
 responses:
   '200':
     description: The product and related developers have been added to their revlant mock databases.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            ID:
+              type: string
+              description: The hex value of the ID assigned to the product
+              example: "5593349f2384b58d1e3ab03b8e4ecf68fa4746ac"
+
+  '409':
+    description: A product with that name is already in the database
+  '400':
+    description: The data for the product was malformed, check the Methodology or date.

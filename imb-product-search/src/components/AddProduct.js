@@ -33,7 +33,7 @@ function AddProduct({tableLoader, setVisablity}) {
                                 Developers: product.Developers, StartDate: product.StartDate, Methodology: product.Methodology})
         };
         // send the POST Request
-        await fetch("http://localhost:3000/api/product",postOptions).then(response => console.log(response));
+        await fetch("http://localhost:3000/api/product",postOptions).catch((error) => {console.log(error)});
         LoadTable(tableLoader);
         setVisablity(false);
         console.log("POST Done");

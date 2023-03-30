@@ -4,6 +4,7 @@ from flasgger import Swagger, swag_from
 from product import productStore
 from personStore import personStore
 import productgen
+import re
 
 # Set up CORS and Flask
 app = Flask(__name__)
@@ -40,16 +41,22 @@ def healthCheck():
 @swag_from("./docs/api/product/post.yml")
 def addNewProduct():
     raw = request.get_json()
+    if (raw['Methodology'] != "Agile") and (raw['Methodology'] != "Waterfall"):
+        return "Error: Please use Agile or Waterfall as your methodology", 400
+    dateCheck = re.compile("^[0-9]{4}\\/[0-9]{1,2}\\/[0-9]{1,2}$")
+    if not (dateCheck.match(raw["StartDate"])):
+        return "Error: Date not correctly formatted, please use YYYY/MM/DD", 400
+    
     if appStore.checkName(raw['ProductName']):
         return "Error: This product name already exists, please use PUT with an ID if you want to edit", 409
     else:
         ID = appStore.addProduct(raw["ProductName"],raw["ProductOwnerName"],raw["Developers"],
                             raw["ScrumMasterName"],raw["StartDate"],raw["Methodology"]
                             )
-        print("got ID"+ID)
         employeeStore.addDev(raw["Developers"], ID)
         employeeStore.addScrum(raw["ScrumMasterName"], ID)
-        return 'Product added', 200
+        print(ID)
+        return jsonify({"ID":ID}), 200
 
 # Get a list of all products in the database
 @app.route("/api/product", methods=['GET'])
@@ -95,6 +102,19 @@ def editByID(prod_id):
         return "Error: could not find the requested ID", 404
     else:
         args = request.get_json()
+        # Check to ensure new data fits standards for storage
+        if "Methodology" in args and ((args['Methodology'] != "Agile") and (args['Methodology'] != "Waterfall")):
+            return "Error: Please use Agile or Waterfall as your methodology", 400
+        dateCheck = re.compile("^[0-9]{4}\\/[0-9]{1,2}\\/[0-9]{1,2}$")
+
+        if "StartDate" in args and not (dateCheck.match(args["StartDate"])):
+            return "Error: Date not correctly formatted, please use YYYY/MM/DD", 400
+        
+        # Check for name collision, but allow for non-edit of name
+        if "ProductName" in args and (args["ProductName"] != appStore.getName(prod_id)):
+            if appStore.checkName(args['ProductName']):
+                return "Error: This product name already exists, please use PUT with an ID if you want to edit", 409
+            
         # get old and new devs to compare 
         oldDevs = appStore.getDevs(prod_id)
         oldScrum = appStore.getScrum(prod_id)
@@ -143,6 +163,8 @@ def addEmployeeError():
 @app.route("/api/employee/<string:name>/developed", methods=['GET'])
 @swag_from("./docs/api/employee/name/developed/get.yml")
 def getDevelopedByName(name):
+    if not employeeStore.checkUser(name):
+        return jsonify({"products":[]}), 200
     name = name.replace("_", " ")
     productIDs = employeeStore.getDevProducts(name)
     developedProducts = []
@@ -169,6 +191,8 @@ def postEmployeeDev(name):
 @app.route("/api/employee/<string:name>/scrummed", methods=['GET'])
 @swag_from("./docs/api/employee/name/scrummed/get.yml")
 def getScrummedByName(name):
+    if not employeeStore.checkUser(name):
+        return jsonify({"products":[]}), 200
     name = name.replace("_", " ")
     productIDs = employeeStore.getScrumProducts(name)
     scrummedProducts = []
