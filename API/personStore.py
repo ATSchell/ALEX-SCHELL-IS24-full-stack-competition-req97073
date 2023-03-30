@@ -1,5 +1,6 @@
 from flask import jsonify
 # Stores people and the projects they developed or were scrum master on
+import databaseHandler
 
 class person:
     def __init__(self):
@@ -10,40 +11,68 @@ class personStore:
     # store for getting products 
     def __init__(self):
         self.store = {}
-    
+
+    def storeDatabase(self, database):
+        databaseHandler.writeDatabase("employees", database)
+
+    def readDatabase(self):
+        test = databaseHandler.readDatabase("employees")
+        return test
+        
     # for a given name, add product if they're already in the store
     # otherwise we make a new person object and add 
     def addDev(self, names:str, product):
+        currentDB = self.readDatabase()
+        items ={
+            "developed":[],
+            "scrummed": []
+        }
         for name in names:
             # check if dev in storage
-            if name in self.store:
-                self.store[name].developed.append(product)
+            if name in currentDB:
+                currentDB[name]["developed"].append(product)
+                #currentDB[name].developed.append(product)
             else:
-                newDev = person()
-                newDev.developed.append(product)
-                self.store[name] = newDev
+                #newDev = person()
+                items["developed"].append(product)
+                currentDB[name] = items
+                #newDev.developed.append(product)
+                #currentDB[name] = newDev
+
+        self.storeDatabase(currentDB)
 
     def addScrum(self, name:str, product):
+        items ={
+            "developed":[],
+            "scrummed": []
+        }
         # check if dev in storage or we need new object
-        if name in self.store:
-            self.store[name].scrummed.append(product)
+        currentDB = self.readDatabase()
+        if name in currentDB:
+            currentDB[name]["scrummed"].append(product)
         else:
-            newDev = person()
-            newDev.scrummed.append(product)
-            self.store[name] = newDev
+            items["scrummed"].append(product)
+            currentDB[name] = items
+        
+        self.storeDatabase(currentDB)
 
     # remove a product from a developer
     def removeDev(self, name, product):
-        if name not in self.store:
+        currentDB = self.readDatabase()
+        if name not in currentDB:
             pass
         else:
-            self.store[name].developed.remove(product)
+            currentDB[name]["developed"].remove(product)
+        self.storeDatabase(currentDB)
 
     def removeScrum(self, name:str, product):
-        if name not in self.store:
+        currentDB = self.readDatabase()
+        if name not in currentDB:
             pass
         else:
-            self.store[name].scrummed.remove(product)
+            currentDB[name]["scrummed"].remove(product)
+
+        self.storeDatabase(currentDB)   
 
     # For use when modifying devs on a product, removes and add product to dev's lists as needed
     def editDev(self, oldDevs, newDevs, product):
@@ -61,17 +90,21 @@ class personStore:
         
     # Return list of users
     def list(self):
-        return list(self.store.keys())
+        currentDB = self.readDatabase()
+        return list(currentDB.keys())
         
     # Return a list of productIDs developed by the user
     def getDevProducts(self, name:str):
-        return self.store[name].developed
+        currentDB = self.readDatabase()
+        return currentDB[name]["developed"]
     
     # Return a list of productIDs scrummed by the user
     def getScrumProducts(self, name:str):
-        return self.store[name].scrummed
+        currentDB = self.readDatabase()
+        return currentDB[name]["scrummed"]
     
     # check if a user is in the database
     def checkUser(self, name:str):
-        return (name in self.store)
+        currentDB = self.readDatabase()
+        return (name in currentDB)
               

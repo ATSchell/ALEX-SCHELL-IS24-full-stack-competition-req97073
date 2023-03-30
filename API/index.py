@@ -6,6 +6,9 @@ from personStore import personStore
 import productgen
 import re
 
+# SET TO TRUE TO ENABLE INIT OF DBs
+generateDBs = False
+
 # Set up CORS and Flask
 app = Flask(__name__)
 cors = CORS(app)
@@ -214,5 +217,6 @@ def postEmployeeScrum(name):
     return 'Not yet implmented', 501
 
 if __name__ == '__main__':
-    productgen.generateProducts(40,appStore, employeeStore)
+    if generateDBs:
+        productgen.generateProducts(40,appStore, employeeStore)
     app.run(host="localhost", port=3000)
