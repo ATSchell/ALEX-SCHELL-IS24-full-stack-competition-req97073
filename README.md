@@ -10,13 +10,13 @@ This project is a submission to fufill the requirments given the [IS-24 Full Sta
 - [x] User Story One: List of all products
     - Should be first thing seen by users when logging in
 - [x] User Story Two: Adding Products
-    - User can click the "Add item" button to open      interface to add an item.
+    - User can click the "Add item" button to open interface to add an item.
 - [x] User Story Three: Editing Products
     - User can click edit button on each entry and show
-- [ ] Bonus User Story Four: Search by Scrum Master
-    - API endpoints ready
-- [ ] Bonus User Story Five: Search by Dev
-    - API endpoints ready
+- [x] Bonus User Story Four: Search by Scrum Master
+    - User can search for products for which a person was a scrum master on
+- [x] Bonus User Story Five: Search by Dev
+    - User can search for products for which a person was a developer on
 
 This project also features Swagger/OpenAPI documentation.
 
@@ -47,7 +47,6 @@ First, to run the backend use `pipenv run python index.py`, which will ensure al
 The frontend should be available at http://localhost:5000/ while the backend will be surfaced at http://localhost:3000/api.
 
 ## Swagger Documentation
-
 Swagger documentation is surfaced while the API is running at http://localhost:3000/api/api-docs/
 
 ## Architecture
