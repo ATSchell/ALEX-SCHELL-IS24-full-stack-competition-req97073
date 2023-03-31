@@ -18,6 +18,13 @@ function TableElement({product, tableRefresh}) {
         Methodology: product.Methodology
     });
 
+    // only enable button when we have entries in all fields
+    const enableSubmit = editProduct.ProductName.length > 0 &&
+                        editProduct.ScrumMasterName.length > 0 &&
+                        editProduct.ProductOwnerName.length > 0 &&
+                        editProduct.Developers.length > 0 &&
+                        editProduct.StartDate.length > 0 ;
+
     const handleChange = (event) => {
         setEditProduct ( {
             ...editProduct,
@@ -49,7 +56,7 @@ function TableElement({product, tableRefresh}) {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ProductName: editProduct.ProductName, ScrumMasterName: editProduct.ScrumMasterName, ProductOwnerName: editProduct.ProductOwnerName,
-                                Developers: editProduct.Developers, StartDate: editProduct.StartDate, Methodology: editProduct.Methodology})
+                                Developers: (editProduct.Developers.toString()).split(','), StartDate: editProduct.StartDate, Methodology: editProduct.Methodology})
         };
         await fetch('http://127.0.0.1:3000/api/product/'+product.ProductID,putOptions);
         LoadTable(tableRefresh);
@@ -67,13 +74,13 @@ function TableElement({product, tableRefresh}) {
                     <td><input defaultValue={product.ScrumMasterName} id="ScrumMasterName" onChange={handleChange} required/></td>
                     <td><input defaultValue={product.StartDate} id="StartDate" onChange={handleChange} required/></td>
                     <td>                
-                        <select defaultvalue={product.Methodology} id="Methodology" onChange={handleChange}>
+                        <select defaultValue={product.Methodology} id="Methodology" onChange={handleChange}>
                             <option value="Agile">Agile</option>
                             <option value="Waterfall">Waterfall</option>
                         </select>
                     </td>
                     <td className='buttonElement'>
-                        <button onClick={()=>SubmitEdit({product})}><img src={confirmIcon} alt="Confirm Edit"></img></button>
+                        <button disabled={!enableSubmit} onClick={()=>SubmitEdit({product})}><img src={confirmIcon} alt="Confirm Edit"></img></button>
                     </td>
                     <td className='buttonElement'>
                         <button onClick={()=>ToggleEdit({product})}><img src={exitIcon} alt="Exit Edit"></img></button>
@@ -84,7 +91,7 @@ function TableElement({product, tableRefresh}) {
                     <td>{product.ProductID}</td>
                     <td>{product.ProductName}</td>
                     <td>{product.ProductOwnerName}</td>
-                    <td>{product.Developers.toString()}</td>
+                    <td>{product.Developers.toString().replace(/,/g, ', ')}</td>
                     <td>{product.ScrumMasterName}</td>
                     <td>{product.StartDate}</td>
                     <td>{product.Methodology}</td>
