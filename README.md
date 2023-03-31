@@ -12,13 +12,18 @@ This project is a submission to fufill the requirments given the [IS-24 Full Sta
 - [x] User Story Two: Adding Products
     - User can click the "Add item" button to open interface to add an item.
 
-https://user-images.githubusercontent.com/10998311/228972609-d550edad-f9c9-4532-8afd-a6adb678aad1.mp4
+
+https://user-images.githubusercontent.com/10998311/229232287-b7fddd8f-bac7-4d1e-b6aa-1542d312229c.mp4
+
 
 
 - [x] User Story Three: Editing Products
     - User can click edit button on each entry and show
 
-https://user-images.githubusercontent.com/10998311/228971796-1e549638-61b7-4421-86d2-41113d682d9f.mp4
+
+https://user-images.githubusercontent.com/10998311/229232320-9d5e8063-8741-4281-9da2-651d8bb98718.mp4
+
+
 
 - [x] Bonus User Story Four: Search by Scrum Master
     - User can search for products for which a person was a scrum master on
