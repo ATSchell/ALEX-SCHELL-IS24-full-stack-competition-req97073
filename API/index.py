@@ -28,14 +28,27 @@ swagger = Swagger(app)
 appStore = productStore()
 employeeStore = personStore()
 
-@app.route('/')
+#@app.route('/')
 
 # --- api/health ---
 
 # Repsond to health check call with status
-@app.route("/api/health")
+@app.route("/api/health",methods=['GET'])
+@swag_from("./docs/api/health/get.yml")
 def healthCheck():
     return 'Status: Healthy', 200
+
+@app.route("/api/health",methods=['POST'])
+def postHealthError():
+    return 'Not allowed', 400
+
+@app.route("/api/health",methods=['PUT'])
+def putHealthError():
+    return 'Not allowed', 400
+
+@app.route("/api/health",methods=['Delete'])
+def deleteHealthError():
+    return 'Not allowed', 400
 
 # --- api/product ---
 

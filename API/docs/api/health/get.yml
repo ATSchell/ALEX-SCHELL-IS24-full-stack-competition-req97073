@@ -1,0 +1,6 @@
+Returns the server status
+Returns a response code of 200 if the server is currently running
+---
+responses:
+  '200':
+    description: Healthy
