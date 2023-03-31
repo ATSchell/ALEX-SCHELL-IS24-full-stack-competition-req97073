@@ -70,15 +70,15 @@ The frontend and backend should now be ready to run!
 ## Running
 **Note: this was developed in windows and tested for linux using WSL, so some differences may come up if using native unix**
 
-First, to run the backend use `pipenv run python index.py` in a terminal, which will ensure all packages are upto date and installed, before running the API service. 
+First, to run the backend use `pipenv run python index.py` in a terminal in the **API** folder, which will ensure all packages are upto date and installed, before running the API service. 
 
 If pipenv fails for some reason, packages can be installed to the host machine using `pip install -r requirements.txt`. Alternativly, with pipenv, run `pipenv shell` followed by `pip install -r requirements.txt` to install to a virtual environment.
 
 ### On Windows
-To run the frontend use `npm run start-win` to spin up the node server on port 5000, the web app should open automatically. 
+To run the frontend use `npm run start-win` in the **imb-product-search** folder to spin up the node server on port 5000, the web app should open automatically. 
 
 ### On Unix 
-To run the frontend use `npm start` to spin up the node server on port 5000 and automatically, the web app should open automatically.
+To run the frontend use `npm start` in the **imb-product-search** folder to spin up the node server on port 5000 and automatically, the web app should open automatically.
 
 The frontend should now be available at http://localhost:5000/ while the backend will be surfaced at http://localhost:3000/api.
 
