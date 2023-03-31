@@ -93,7 +93,7 @@ For any installation/run issues, please feel free to contact me.
 Swagger documentation is surfaced while the API is running at http://localhost:3000/api/api-docs/
 
 ## Architecture
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/10998311/228973658-c5789a30-9667-4e1d-9347-cd83b4a3a438.png)
+![Architecture Diagram](https://user-images.githubusercontent.com/10998311/229236826-26d9a545-5fb7-458b-8633-457821e85b45.png)
 
 The current architecture is set to be object-oriented and component based. For example, the API does not need information about the database itself or the storage of data in them, as data writing is handled by the backend python functions (product.py and personStore.py), and storing to JSON files is handled by the databaseHandler. This allows for the easy addition/modification of parts when needed, such as accessing new data, or moving to an actual database. 
 
