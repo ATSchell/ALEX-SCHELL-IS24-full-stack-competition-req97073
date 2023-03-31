@@ -26,29 +26,57 @@ export const LoadTableForDev = async(setTable, name, type) => {
 
 //main display of table
 function DataTable({tableData, tableUpdater}) {
-    
-    return (
-    <div className="Scrollable-Table">
-      <table>
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Owner</th>
-                <th>Developers</th>
-                <th>Scrum Master</th>
-                <th>Start Date</th>
-                <th>Methodology</th>
-                <th colSpan="2"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {tableData.map((product, id) => ( <TableElement product={product} tableRefresh={tableUpdater} />))}
-        </tbody>
-        <tfoot><tr><td colSpan="9">Total products retrieved: {tableData.length}</td></tr></tfoot>
-        </table>
-      </div>
-    );
+    if(tableData.length != 0) {
+      return (
+        <div className="Scrollable-Table">
+          <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Owner</th>
+                    <th>Developers</th>
+                    <th>Scrum Master</th>
+                    <th>Start Date</th>
+                    <th>Methodology</th>
+                    <th colSpan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {tableData.map((product, id) => ( <TableElement product={product} tableRefresh={tableUpdater} />))}
+            </tbody>
+            <tfoot><tr><td colSpan="9">Total products retrieved: {tableData.length}</td></tr></tfoot>
+            </table>
+          </div>
+        );
+
+    } else {
+      return ( 
+        <div className="Scrollable-Table">
+        <table>
+          <thead>
+              <tr>
+                  <th>Product ID</th>
+                  <th>Name</th>
+                  <th>Owner</th>
+                  <th>Developers</th>
+                  <th>Scrum Master</th>
+                  <th>Start Date</th>
+                  <th>Methodology</th>
+                  <th colSpan="2"></th>
+              </tr>
+          </thead>
+          <tbody>
+             <tr>
+                <td className='EmptyTable' colSpan="9">No entries found!</td>
+             </tr>
+          </tbody>
+          <tfoot><tr><td colSpan="9">Total products retrieved: {tableData.length}</td></tr></tfoot>
+          </table>
+        </div>
+      )
+    }
+
   };
 
 

@@ -32,6 +32,11 @@ button:active {
   background-color: #8b0144;
 }
 
+button:disabled {
+  background-color: #573e4a;
+  color: #b8b8b8;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   background-color: #12101C;

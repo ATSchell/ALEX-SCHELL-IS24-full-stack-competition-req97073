@@ -36,6 +36,11 @@ tr:nth-child(even) input {
     border: none;
 }
 
+.EmptyTable {
+    font-style: italic;
+    color: #555555;
+}
+
 .Scrollable-Table {
     overflow: auto;
     height: 700px;

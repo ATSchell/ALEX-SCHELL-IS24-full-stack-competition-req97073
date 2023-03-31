@@ -12,6 +12,13 @@ function AddProduct({tableLoader, setVisablity}) {
         StartDate: "",
         Methodology: "Agile"
     });
+    
+    // only enable button when we have entries in all fields
+    const enableSubmit = product.ProductName.length > 0 &&
+                         product.ScrumMasterName.length > 0 &&
+                         product.ProductOwnerName.length > 0 &&
+                         product.Developers.length > 0 &&
+                         product.StartDate.length > 0 ;
 
     // update the data from the form as needed
     const handleChange = (event) => {
@@ -73,7 +80,7 @@ function AddProduct({tableLoader, setVisablity}) {
                     <option value="Waterfall">Waterfall</option>
                 </select>
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={!enableSubmit} >Submit</button>
         </form>
     )
 };//addproduct
