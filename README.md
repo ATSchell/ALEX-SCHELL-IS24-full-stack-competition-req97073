@@ -1,5 +1,4 @@
 # IMB Product Store Test Project
-*For imb-full-stack-code-challenge-req97073*
 
 **By: Alex Schell**
 ![example screenshot](https://i.imgur.com/NQyHsd0.png)
@@ -47,39 +46,43 @@ This project uses the following
  - **Node.js** for serving project using JS
  - **React** to add state and improve frontend
  - **Flask** for API 
- - **Flask-CORS** 
+ - **Flask-CORS** for cross-port communication with Flask
  - **flasgger** To handle Swagger API documentation
 
 The installation and maintenance of these are handled by pipenv and npm for the backend and frontend, respectively.
 
 ## Setup
 Assumes Node/JS is set up
-- Install Python 3
+- Install Python 3 (3.11 used for development)
 - Install Node/NPM
-- Run `npm ci` in the imb-product-search folder to load the requriments from `package.json`
+- Run `npm ci` in the **imb-product-search** folder to load the requriments from `package.json`
 - Get [https://pipenv.pypa.io/en/latest/](pipenv) by running `pip install pipenv`
+    - This may also require installing [https://github.com/pyenv/pyenv](pyenv) for automatically grabbing the correct version of Python
+- Run `pipenv install` in the **API** folder to set up the virtual envrionment for running the API by grabbing required libs.
 
 The frontend and backend should now be ready to run!
 
 ## Running
 **Note: this was developed in windows and tested for linux using WSL, so some differences may come up if using native unix**
 
-First, to run the backend use `pipenv run python index.py`, which will ensure all packages are upto date and installed, before running the API service. 
+First, to run the backend use `pipenv run python index.py` in a terminal, which will ensure all packages are upto date and installed, before running the API service. 
 
-The frontend should be available at http://localhost:5000/ while the backend will be surfaced at http://localhost:3000/api.
-
-If pipenv fails for some reason, packages can be installed to the host machine using `pip install -r requirements.txt`.
+If pipenv fails for some reason, packages can be installed to the host machine using `pip install -r requirements.txt`. Alternativly, with pipenv, run `pipenv shell` followed by `pip install -r requirements.txt` to install to a virtual environment.
 
 ### On Windows
-To run the frontend use `npm run start-win` to spin up the node server on port 5000 and automatically, the web app should open automatically. 
+To run the frontend use `npm run start-win` to spin up the node server on port 5000, the web app should open automatically. 
 
-### On Linux 
+### On Unix 
 To run the frontend use `npm start` to spin up the node server on port 5000 and automatically, the web app should open automatically.
 
-**During testing under WSL, `npm run start-win` was found to work.**
+The frontend should now be available at http://localhost:5000/ while the backend will be surfaced at http://localhost:3000/api.
+
+**If using WSL or the regular start script fails, `npm run start-win` was found to work.**
 
 
 If for some reason the backend .json files become corrupted, they can be fixed by setting `generateDBs` to `true` in the index.py file. This will call to generate fresh new databases.
+
+For any installation/run issues, please feel free to contact me.
 
 ## Swagger Documentation
 Swagger documentation is surfaced while the API is running at http://localhost:3000/api/api-docs/
