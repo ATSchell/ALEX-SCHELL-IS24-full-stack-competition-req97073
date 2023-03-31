@@ -43,8 +43,8 @@ This project also features Swagger/OpenAPI documentation.
 ## Requirements
 This project uses the following
  - **Javascript** for the frontend
- - **Python** for the API/Backend
- - **Node.js** for serving project
+ - **Python 3.11** for the API/Backend
+ - **Node.js** for serving project using JS
  - **React** to add state and improve frontend
  - **Flask** for API 
  - **Flask-CORS** 
@@ -54,17 +54,30 @@ The installation and maintenance of these are handled by pipenv and npm for the 
 
 ## Setup
 Assumes Node/JS is set up
-- Install Python 
-- Install React
-- Run `npm ci` in the main folder to load the requriments from `package.json`
-- Get [https://pipenv.pypa.io/en/latest/](pipenv) by running `pin install pipenv`
+- Install Python 3
+- Install Node/NPM
+- Run `npm ci` in the imb-product-search folder to load the requriments from `package.json`
+- Get [https://pipenv.pypa.io/en/latest/](pipenv) by running `pip install pipenv`
 
 The frontend and backend should now be ready to run!
 
 ## Running
-First, to run the backend use `pipenv run python index.py`, which will ensure all packages are upto date and installed, before running the API service. To run the frontend use `npm start` to spin up the node server and automatically, the web app should open automatically. 
+**Note: this was developed in windows and tested for linux using WSL, so some differences may come up if using native unix**
+
+First, to run the backend use `pipenv run python index.py`, which will ensure all packages are upto date and installed, before running the API service. 
 
 The frontend should be available at http://localhost:5000/ while the backend will be surfaced at http://localhost:3000/api.
+
+If pipenv fails for some reason, packages can be installed to the host machine using `pip install -r requirements.txt`.
+
+### On Windows
+To run the frontend use `npm run start-win` to spin up the node server on port 5000 and automatically, the web app should open automatically. 
+
+### On Linux 
+To run the frontend use `npm start` to spin up the node server on port 5000 and automatically, the web app should open automatically.
+
+**During testing under WSL, `npm run start-win` was found to work.**
+
 
 If for some reason the backend .json files become corrupted, they can be fixed by setting `generateDBs` to `true` in the index.py file. This will call to generate fresh new databases.
 
@@ -77,4 +90,3 @@ Swagger documentation is surfaced while the API is running at http://localhost:3
 The current architecture is set to be object-oriented and component based. For example, the API does not need information about the database itself or the storage of data in them, as data writing is handled by the backend python functions (product.py and personStore.py), and storing to JSON files is handled by the databaseHandler. This allows for the easy addition/modification of parts when needed, such as accessing new data, or moving to an actual database. 
 
 Similarly in the frontend, most elements are handled as React components, with HTML and functionality stored in the same area. This allows for easier building and adding of page elements, as well as reuse in other parts. For example, each row in the table is a React element, reducing the lines of code, and making deletion/editing of data require less interconnection between parts. 
-
