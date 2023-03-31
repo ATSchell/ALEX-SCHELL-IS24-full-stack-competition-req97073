@@ -30,7 +30,7 @@ function AddProduct({tableLoader, setVisablity}) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ProductName: product.ProductName, ScrumMasterName: product.ScrumMasterName, ProductOwnerName: product.ProductOwnerName,
-                                Developers: product.Developers, StartDate: product.StartDate, Methodology: product.Methodology})
+                                Developers: product.Developers.split(','), StartDate: product.StartDate, Methodology: product.Methodology})
         };
         // send the POST Request
         await fetch("http://localhost:3000/api/product",postOptions).catch((error) => {console.log(error)});
@@ -43,7 +43,7 @@ function AddProduct({tableLoader, setVisablity}) {
         <form onSubmit={handleAddProduct}>
             <label>
                 Product Name
-                <input placeholder="Product Name" id="ProductName" 
+                <input placeholder="Unique Name" id="ProductName" 
                 value={product.ProductName} onChange={handleChange} required/>
             </label>
             <label>
@@ -58,12 +58,12 @@ function AddProduct({tableLoader, setVisablity}) {
             </label>
             <label>
                 Developers
-                <input placeholder="Developer Names" id="Developers" 
+                <input placeholder="e.g dev a, dev b" id="Developers" 
                 value={product.Developers} onChange={handleChange} required/>
             </label>
             <label>
                 Start Date
-                <input placeholder="Start Date" id="StartDate" 
+                <input placeholder="YYYY/MM/DD" id="StartDate" 
                 value={product.StartDate} onChange={handleChange} required/>
             </label>
             <label>
